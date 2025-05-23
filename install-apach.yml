@@ -1,0 +1,19 @@
+---
+- name: Install apache2 on Ubuntu
+  hosts: Ubuntu
+  become: yes
+
+  tasks:
+    - name: Update APT module
+      apt:
+        update_cache: yes
+
+    - name: Install apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: starting apache2
+      service:
+        name: apache2
+        state: started

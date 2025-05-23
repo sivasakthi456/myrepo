@@ -1,0 +1,26 @@
+---
+- name: handlers
+  hosts: all
+  become: yes
+  tasks: 
+    - name: copy config file
+      copy: 
+        src: /root/ansible/index.html
+        dest: /var/www/html
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+        - restart ubunt
+        - restart the apache in AL
+  handler:
+    - name: restart ubunt
+      when: ansible_os_family= "Debian"
+      service:
+        name: apache2
+        state: restarted
+    - name: restart the apache in AL
+      when: ansible_os_family == "Amazon"
+      service:
+        name: httpd
+        state: restarted

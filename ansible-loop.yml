@@ -1,0 +1,21 @@
+---
+  - name: imhcjg install many softwares at a time
+    hosts: Ubuntu
+    become: yes
+
+    vars:
+      packagel list: 
+      - nginx
+      - apache2
+      - deafault-jdk
+      - python-3
+      - mysql-server
+
+    tasks:
+      - name: installing all my listed softwares one by one
+        apt:
+          name: "{{ item }}"
+          state: present
+        
+        loop: "{{ package_list }}"
+

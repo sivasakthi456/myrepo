@@ -1,0 +1,31 @@
+---
+- name: Upgrade kernel for all OS
+  hosts: all
+  become: yes
+  gather_facts: yes
+  tasks:
+    - name: Upgrade kernel for Debian/Ubuntu
+      when: ansible_os_family == "Debian"
+      apt:
+        upgrade: dist
+
+
+    - name: Upgrade kernel for RedHat/CentOS
+      when: ansible_os_family == "RedHat"
+      dnf:
+        name: kernel
+        state: latest
+
+
+    - name: Upgrade kernel for SUSE
+      when: ansible_os_family == "Suse"
+      zypper:
+        name: kernel-default
+        state: latest
+
+
+    - name: Upgrade kernel for Amazon Linux
+      when: ansible_distribution == "Amazon"
+      dnf:
+        name: kernel
+        state: latest

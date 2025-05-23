@@ -1,0 +1,16 @@
+---
+- name: Reboot system
+  become: yes
+  hosts: all
+  tasks:
+    - name: Reboot if kernel upgraded
+      reboot:
+        msg: "Rebooting the system to apply the new kernel"
+        reboot_timeout: 300
+        pre_reboot_delay: 0
+
+
+    - name: Wait for hosts to come back online
+      wait_for_connection:
+        delay: 30
+        timeout: 300

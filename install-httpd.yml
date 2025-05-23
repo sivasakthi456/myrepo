@@ -1,0 +1,19 @@
+---
+- name: httpd Install
+  hosts: Al
+  become: yes
+
+  tasks:
+    - name: Update apt module
+      dnf:
+        update_cache: yes
+
+    - name: Install httpd
+      dnf:
+        name: httpd
+        state: present
+  
+    - name: starting httpd
+      service:
+        name: httpd
+        state: started

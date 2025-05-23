@@ -1,0 +1,15 @@
+---
+- name: installing nginx for boh ubuntu and AL
+  hosts: all
+  tasks:
+    - name: installing nginx in ubuntu
+      when: ansible_os_family == "Debian"
+      apt: 
+        name: nginx
+        state: present
+
+    - name: installing nginx in Al
+      when: ansible_os_family == "Amazon"
+      dnf:
+        name: nginx
+        state: present
