@@ -28,4 +28,4 @@
       when: ansible_distribution == "Amazon"
       dnf:
         name: kernel
-        state: latest
+        state: latestS

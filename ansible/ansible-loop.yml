@@ -18,4 +18,3 @@
           state: present
         
         loop: "{{ package_list }}"
-
